@@ -87,12 +87,12 @@ A comprehensive bus management system with real-time tracking, arrival time pred
    Create a `.env` file in the `server` directory:
    ```env
    PORT=5000
-   MONGO_URI=mongodb+srv://estdev123:magicals@cluster0.gqydji2.mongodb.net/mouse
-   JWT_SECRET=quertypajsjff
-   CLOUDINARY_CLOUD_NAME=dyznk0c2q
-   CLOUDINARY_API_KEY=644115212454323
-   CLOUDINARY_SECRET_KEY=bjNmgvUL0LkuRQmLpKvvEeGHkQE
-   NODE_ENV=development
+   MONGO_URI=''
+   JWT_SECRET=''
+   CLOUDINARY_CLOUD_NAME=''
+   CLOUDINARY_API_KEY=''
+   CLOUDINARY_SECRET_KEY=''
+   NODE_ENV=''
    ```
 
 4. **Database Setup**
