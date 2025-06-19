@@ -23,7 +23,7 @@ const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
     origin: process.env.NODE_ENV === 'production' 
-      ? process.env.FRONTEND_URL || "https://your-frontend-domain.vercel.app"
+      ? process.env.FRONTEND_URL || "https://ebus-tracking-system.vercel.app"
       : "http://localhost:5173",
     methods: ["GET", "POST"]
   }
@@ -33,7 +33,7 @@ const io = socketIo(server, {
 app.use(helmet());
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? process.env.FRONTEND_URL || "https://your-frontend-domain.vercel.app"
+    ? process.env.FRONTEND_URL || "https://ebus-tracking-system.vercel.app"
     : 'http://localhost:5173',
   credentials: true
 }));
