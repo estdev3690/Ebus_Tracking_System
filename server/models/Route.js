@@ -159,7 +159,6 @@ const routeSchema = new mongoose.Schema({
 
 // Index for geospatial queries
 routeSchema.index({ 'stops.location': '2dsphere' });
-routeSchema.index({ routeNumber: 1 });
 routeSchema.index({ status: 1 });
 
 // Method to calculate fare between two stops

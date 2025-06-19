@@ -5,7 +5,10 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const http = require('http');
 const socketIo = require('socket.io');
+
+// Load environment variables - try config.env first, then fallback to .env
 require('dotenv').config({ path: './config.env' });
+require('dotenv').config(); // This will load .env if config.env doesn't exist
 
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
@@ -19,7 +22,9 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: process.env.NODE_ENV === 'production' 
+      ? process.env.FRONTEND_URL || "https://your-frontend-domain.vercel.app"
+      : "http://localhost:5173",
     methods: ["GET", "POST"]
   }
 });
@@ -27,7 +32,9 @@ const io = socketIo(server, {
 // Security middleware
 app.use(helmet());
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: process.env.NODE_ENV === 'production' 
+    ? process.env.FRONTEND_URL || "https://your-frontend-domain.vercel.app"
+    : 'http://localhost:5173',
   credentials: true
 }));
 
@@ -42,10 +49,21 @@ app.use(limiter);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('Connected to MongoDB Atlas'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// MongoDB Connection with better error handling
+const connectDB = async () => {
+  try {
+    if (!process.env.MONGO_URI) {
+      throw new Error('MONGO_URI environment variable is not defined');
+    }
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log('Connected to MongoDB Atlas');
+  } catch (error) {
+    console.error('MongoDB connection error:', error.message);
+    process.exit(1);
+  }
+};
+
+connectDB();
 
 // Routes
 app.use('/api/auth', authRoutes);

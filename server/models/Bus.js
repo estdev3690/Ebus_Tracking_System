@@ -143,8 +143,8 @@ const busSchema = new mongoose.Schema({
 
 // Index for geospatial queries
 busSchema.index({ currentLocation: '2dsphere' });
-busSchema.index({ busNumber: 1 });
-busSchema.index({ registrationNumber: 1 });
+// busSchema.index({ busNumber: 1 }); // Removed - unique constraint already creates index
+// busSchema.index({ registrationNumber: 1 }); // Removed - unique constraint already creates index
 busSchema.index({ status: 1 });
 
 // Virtual for available seats
