@@ -1,0 +1,28 @@
+{
+  "name": "ebus-management-system",
+  "version": "1.0.0",
+  "description": "E-Bus Management System with real-time tracking and prediction",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "start": "cd server && npm start"
+  },
+  "keywords": [
+    "bus",
+    "management",
+    "tracking",
+    "prediction",
+    "react",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "E-Bus Management Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+} 
